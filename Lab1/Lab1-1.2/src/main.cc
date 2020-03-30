@@ -54,11 +54,9 @@ void *shuru(void *arg)
 }
 void *solve(void *arg) 
 {
- //   int p=*(int*)arg;
+ 
     while(1){   
-             /*   pthread_mutex_lock(&lock);
-		while(!isready_work) {worklocked=true;pthread_cond_wait(&cond_work, &lock);}
-                pthread_mutex_unlock(&lock);*/
+             
 		while(isready_work){
                         SDK *sdk=new SDK();
 			if(!q1->empty()){
@@ -69,13 +67,10 @@ void *solve(void *arg)
                               pthread_mutex_unlock(&lock);                       
                               solve_sudoku_dancing_links(sdk);
                               sdk->flag=true;
-                          /*       for(int i=0;i<N;i++)
-                               printf("%d",sdk->answer[i]);
-                               printf("   %d\n",p);*/
+                          
                                if(!q2->empty()){
                                       isready_output=true;
-                                    //   outputlocked=false;
-                                    //  pthread_cond_signal(&cond_output);    
+                                      
                                 }
 			}
                         else isready_work=false;
@@ -88,9 +83,7 @@ void *shuchu(void *arg)
 {
    int sum=0;
     while(!finish_output){ 
-          /*      pthread_mutex_lock(&lock);
-		while(!isready_output) {outputlocked=true;pthread_cond_wait(&cond_output, &lock);}
-                pthread_mutex_unlock(&lock); */
+         
 		while(isready_output){
                         SDK *sdk=new SDK();
 			if(!q2->empty()){
@@ -99,7 +92,7 @@ void *shuchu(void *arg)
                               q2->pop();
                               pthread_mutex_lock(&lock); 
                                sum++;
-                            //   printf("%d:",sum);
+                           
                                for(int i=0;i<N;i++)
                                printf("%d",sdk->answer[i]);
                                printf("\n");
@@ -139,30 +132,4 @@ int main()
   printf("%f sec %f ms each %d\n", sec, 1000*sec/total, sovle_total);
   return 0;
 }
-  /*
-  char puzzle[128];
-  int total_solved = 0;
-  int total = 0;
-  bool (*solve)(int) =solve_sudoku_dancing_links;
-  int64_t start = now();
-  while (fgets(puzzle, sizeof puzzle, fp) != NULL) {
-    if (strlen(puzzle) >= N) {
-      ++total;
-      input(puzzle);
-      if (solve(0)) {
-        ++total_solved;
-        if (!solved())
-          assert(0);
-      }
-      else {
-        printf("No: %s", puzzle);
-      }
-    }
-    for(int i=0;i<N;i++)
-    printf("%d",board[i]);
-    printf("\n");
-  }
-  int64_t end = now();
-  double sec = (end-start)/1000000.0;
-  printf("%f sec %f ms each %d\n", sec, 1000*sec/total, total_solved);
-  */
+  
