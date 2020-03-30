@@ -37,13 +37,10 @@ void *shuru(void *arg)
 		   if(fgets(sdk->puzzle, sizeof sdk->puzzle, fp) != NULL){
 			   total++;
 			   input(sdk);
-			//   printf("%s",sdk->puzzle);
 			   q1->push(sdk);
 			   q2->push(sdk);
 			   if(!q1->empty()){
 				   isready_work=true;
-                                //   worklocked=false;
-				 //   pthread_cond_signal(&cond_work);
                                 
 			   } 
                            pthread_mutex_unlock(&lock);
